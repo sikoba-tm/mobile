@@ -3,23 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_daftar_bencana">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.tekmob.sikoba.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_daftar_bencana"
+        android:name="com.tekmob.sikoba.ui.daftarBencana.DaftarBencanaFragment"
+        android:label="@string/menu_daftar_bencana"
+        tools:layout="@layout/fragment_daftar_bencana" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.tekmob.sikoba.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_pencarian_tersimpan"
+        android:name="com.tekmob.sikoba.ui.pencarianTersimpan.PencarianTersimpanFragment"
+        android:label="@string/menu_pencarian_tersimpan"
+        tools:layout="@layout/fragment_pencarian_tersimpan" />
 
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.tekmob.sikoba.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
 </navigation>

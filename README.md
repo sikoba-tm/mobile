@@ -1,4 +1,4 @@
-# Sistem Informasi Korban Bencana Alam
+# Sistem Informasi Pencarian Korban Bencana Alam
 
 ## Mata Kuliah Teknologi Mobile Gasal 22/23 
 ### Fakultas Ilmu Komputer Universitas Indonesia

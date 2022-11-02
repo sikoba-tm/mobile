@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bencana_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardBackgroundColor="@color/light_green"
+    android:layout_margin="8dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gambar_bencana"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/nama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            tools:text="@string/app_name"
+            android:textColor="#000000"
+            style="@style/BencanaCardNama"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            />
+
+        <TextView
+            android:id="@+id/tanggal_kejadian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:textColor="#000000"
+            tools:text="@string/app_name"
+            style="@style/BencanaCardContent"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/lokasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            tools:text="@string/app_name"
+            android:textColor="#000000"
+            style="@style/BencanaCardContent"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"/>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
