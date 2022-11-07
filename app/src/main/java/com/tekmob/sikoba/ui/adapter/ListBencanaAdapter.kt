@@ -10,6 +10,8 @@ import com.tekmob.sikoba.model.Bencana
 class ListBencanaAdapter(private val listBencana : List<Bencana>) :
     RecyclerView.Adapter<ListBencanaAdapter.ListBencanaHolder>() {
 
+    private lateinit var onItemClickCallback : OnItemClickCallback
+
     inner class ListBencanaHolder(var binding : BencanaCardBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -27,10 +29,20 @@ class ListBencanaAdapter(private val listBencana : List<Bencana>) :
                 tanggalKejadian.text = bencana.tanggalKejadian.toString()
             }
             itemView.setOnClickListener {
-
+                onItemClickCallback.onItemClicked(
+                    listBencana[adapterPosition]
+                )
             }
         }
     }
 
+    fun setOnItemClickCallback(onItemClickCallback : OnItemClickCallback){
+        this.onItemClickCallback = onItemClickCallback
+    }
+
     override fun getItemCount(): Int = listBencana.size
+
+    interface OnItemClickCallback{
+        fun onItemClicked(data : Bencana)
+    }
 }

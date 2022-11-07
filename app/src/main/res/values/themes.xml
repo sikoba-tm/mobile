@@ -27,7 +27,7 @@
         <item name="color">@color/black</item>
     </style>
 
-    <style name="BencanaCardContent" parent="TextAppearance.MaterialComponents.Caption">
+    <style name="BencanaCardContent" parent="TextAppearance.MaterialComponents.Body2">
         <item name="color">@color/black</item>
     </style>
 </resources>

@@ -12,4 +12,6 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_daftar_bencana">Daftar Bencana</string>
     <string name="menu_pencarian_tersimpan">Pencarian Tersimpan</string>
+
+    <string name="tempat_tanggal_lahir">%1$s, %2$s</string>
 </resources>

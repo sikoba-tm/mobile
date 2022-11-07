@@ -8,22 +8,22 @@ import java.util.*
 @Parcelize
 data class Bencana(
 
-    @field:SerializedName("id")
-    val id: Long,
-
-    @field:SerializedName("created_at")
-    val createdAt: Date,
-
-    @field:SerializedName("id")
-    val updatedAt: Date,
-
     @field:SerializedName("nama")
-    val nama: String,
-
-    @field:SerializedName("tanggal_kejadian")
-    val tanggalKejadian: Date,
+    val nama: String? = null,
 
     @field:SerializedName("lokasi")
-    val lokasi: String
+    val lokasi: String? = null,
+
+    @field:SerializedName("CreatedAt")
+    val createdAt: String? = null,
+
+    @field:SerializedName("id")
+    val id: Int? = null,
+
+    @field:SerializedName("tanggal_kejadian")
+    val tanggalKejadian: String? = null,
+
+    @field:SerializedName("UpdatedAt")
+    val updatedAt: String? = null
 
 ) : Parcelable
