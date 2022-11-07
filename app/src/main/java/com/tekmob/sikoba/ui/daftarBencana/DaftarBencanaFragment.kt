@@ -57,6 +57,7 @@ class DaftarBencanaFragment : Fragment() {
                     setListBencanaContent(res.data)
                 }
                 is Result.Error -> {
+                    binding.progressBar.visibility = View.GONE
                     context?.let {
                         AlertDialog.Builder(it).apply {
                             setTitle("Gagal!")

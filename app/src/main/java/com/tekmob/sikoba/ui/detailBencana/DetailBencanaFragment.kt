@@ -35,15 +35,6 @@ class DetailBencanaFragment : Fragment() {
         binding.rvKorban.layoutManager = layoutManager
 
 
-
-        viewModel.bencana.observe(viewLifecycleOwner){
-            setBencana(it)
-        }
-
-        viewModel.listKorban.observe(viewLifecycleOwner){
-            setListKorban(it)
-        }
-
         return inflater.inflate(R.layout.fragment_detail_bencana, container, false)
     }
 
