@@ -16,6 +16,9 @@
         android:theme="@style/Theme.SIKOBA"
         tools:targetApi="31">
         <activity
+            android:name=".ui.detailKorban.DetailKorbanActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.detailBencana.DetailBencanaActivity"
             android:exported="false" />
         <activity

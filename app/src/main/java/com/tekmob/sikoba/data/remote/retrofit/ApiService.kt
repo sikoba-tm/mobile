@@ -20,4 +20,10 @@ interface ApiService {
     fun getDaftarKorban(
         @Path("id_bencana") id : Int
     ) : Call<List<Korban>>
+
+    @GET("bencana/{id_bencana}/korban/{id_korban}")
+    fun getDetailKorban(
+        @Path("id_bencana") idBencana : Int,
+        @Path("id_korban") idKorban : Int
+    ) : Call<Korban>
 }

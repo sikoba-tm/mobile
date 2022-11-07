@@ -1,5 +1,6 @@
 package com.tekmob.sikoba.ui.detailBencana
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -15,23 +16,27 @@ import com.tekmob.sikoba.ui.ViewModelFactory
 import com.tekmob.sikoba.ui.adapter.ListKorbanAdapter
 import com.tekmob.sikoba.data.Result
 import com.tekmob.sikoba.ui.daftarBencana.DaftarBencanaViewModel
+import com.tekmob.sikoba.ui.detailKorban.DetailKorbanActivity
 
 class DetailBencanaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBencanaBinding
     private lateinit var viewModel: DetailBencanaViewModel
+    private lateinit var bencana: Bencana
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBencanaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.title = "Detail Bencana"
+
         viewModel = ViewModelProvider(this, ViewModelFactory())[DetailBencanaViewModel::class.java]
 
         val layoutManager = LinearLayoutManager(this)
         binding.rvKorban.layoutManager = layoutManager
 
-        val bencana = intent.getParcelableExtra<Bencana>(BENCANA) as Bencana
+        bencana = intent.getParcelableExtra<Bencana>(BENCANA) as Bencana
         setBencana(bencana)
 
         bencana.id?.let {
@@ -72,6 +77,15 @@ class DetailBencanaActivity : AppCompatActivity() {
     private fun setListKorban(listKorban : List<Korban>) {
         val adapter = ListKorbanAdapter(listKorban, this)
         binding.rvKorban.adapter = adapter
+        adapter.setOnItemClickCallback(object : ListKorbanAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: Korban) {
+                val intent = Intent(this@DetailBencanaActivity, DetailKorbanActivity::class.java)
+                intent.putExtra(DetailKorbanActivity.ID_KORBAN, data.id)
+                intent.putExtra(DetailKorbanActivity.ID_BENCANA, bencana.id)
+                startActivity(intent)
+            }
+        } )
+
     }
 
     companion object {

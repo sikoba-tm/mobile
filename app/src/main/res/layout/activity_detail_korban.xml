@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detailKorban.DetailKorbanActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="@color/light_green"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/foto"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/nama"
+                style="@style/TextAppearance.MaterialComponents.Headline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/foto"
+                tools:text="@string/app_name" />
+
+            <TextView
+                android:id="@+id/informasi_umum"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="#000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nama"
+                android:text="Informasi Umum" />
+
+            <TextView
+                android:id="@+id/tempat_tanggal_lahir"
+                style="@style/BencanaCardContent"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:textColor="#000000"
+                app:drawableLeftCompat="@drawable/ic_baseline_date_range_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/informasi_umum"
+                tools:text="@string/app_name" />
+
+            <TextView
+                android:id="@+id/nama_ibu_kandung"
+                style="@style/BencanaCardContent"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:textColor="#000000"
+                app:drawableLeftCompat="@drawable/ic_baseline_pregnant_woman_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tempat_tanggal_lahir"
+                tools:text="@string/app_name" />
+
+            <TextView
+                android:id="@+id/kondisi"
+                style="@style/BencanaCardContent"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                app:drawableLeftCompat="@drawable/ic_baseline_health_and_safety_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nama_ibu_kandung"
+                tools:text="@string/app_name" />
+
+            <TextView
+                android:id="@+id/informasi_posko"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="#000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/kondisi"
+                android:text="Informasi Posko" />
+
+            <TextView
+                android:id="@+id/nama_posko"
+                style="@style/BencanaCardContent"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:textColor="#000000"
+                app:drawableLeftCompat="@drawable/ic_baseline_home_work_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/informasi_posko"
+                tools:text="@string/app_name" />
+
+            <TextView
+                android:id="@+id/alamat_posko"
+                style="@style/BencanaCardContent"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:textColor="#000000"
+                app:drawableLeftCompat="@drawable/ic_baseline_location_on_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nama_posko"
+                tools:text="@string/app_name" />
+
+            <TextView
+                android:id="@+id/nama_pj"
+                style="@style/BencanaCardContent"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                app:drawableLeftCompat="@drawable/ic_baseline_person_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/alamat_posko"
+                tools:text="@string/app_name" />
+
+            <TextView
+                android:id="@+id/no_telp_pj"
+                style="@style/BencanaCardContent"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                app:drawableLeftCompat="@drawable/ic_baseline_call_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nama_pj"
+                tools:text="@string/app_name" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

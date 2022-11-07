@@ -23,6 +23,10 @@ class Repository private constructor(
     private val _responseDaftarKorban = MutableLiveData<List<Korban>>()
     private val responseDaftarKorban : LiveData<List<Korban>> = _responseDaftarKorban
 
+    private val resultKorban = MediatorLiveData<Result<Korban>>()
+    private val _responseKorban = MutableLiveData<Korban>()
+    private val responseKorban : LiveData<Korban> = _responseKorban
+
     fun getDaftarBencana() : LiveData<Result<List<Bencana>>> {
         resultDaftarBencana.value = Result.Loading
         val client = apiService.getDaftarBencana()
@@ -33,6 +37,7 @@ class Repository private constructor(
                     resultDaftarBencana.addSource(responseDaftarBencana) { res ->
                         resultDaftarBencana.value = Result.Success(res)
                     }
+                    resultDaftarBencana.removeSource(responseDaftarBencana)
                 } else {
                     resultDaftarBencana.value = Result.Error("Error get daftar bencana")
                 }
@@ -67,6 +72,29 @@ class Repository private constructor(
         })
 
         return resultDaftarKorban
+    }
+
+    fun getKorban(idBencana: Int, idKorban : Int) : LiveData<Result<Korban>>{
+        resultKorban.value = Result.Loading
+        apiService.getDetailKorban(idBencana, idKorban).enqueue(object : Callback<Korban> {
+            override fun onResponse(call: Call<Korban>, response: Response<Korban>) {
+                if (response.isSuccessful) {
+                    _responseKorban.value = response.body()
+                    resultKorban.addSource(responseKorban) { res ->
+                        resultKorban.value = Result.Success(res)
+                    }
+                    resultKorban.removeSource(responseKorban)
+                } else {
+                    resultKorban.value = Result.Error("Error get detail korban")
+                }
+            }
+
+            override fun onFailure(call: Call<Korban>, t: Throwable) {
+                resultKorban.value = t.message?.let { Result.Error(it) }
+            }
+        })
+
+        return resultKorban
     }
 
     companion object {
