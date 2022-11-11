@@ -7,6 +7,7 @@ import com.tekmob.sikoba.data.remote.retrofit.ApiService
 import com.tekmob.sikoba.data.Result
 import com.tekmob.sikoba.model.Bencana
 import com.tekmob.sikoba.model.Korban
+import com.tekmob.sikoba.model.Posko
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,6 +27,10 @@ class Repository private constructor(
     private val resultKorban = MediatorLiveData<Result<Korban>>()
     private val _responseKorban = MutableLiveData<Korban>()
     private val responseKorban : LiveData<Korban> = _responseKorban
+
+    private val resultDaftarPosko = MediatorLiveData<Result<List<Posko>>>()
+    private val _responseDaftarPosko = MutableLiveData<List<Posko>>()
+    private val responseDaftarPosko : LiveData<List<Posko>> = _responseDaftarPosko
 
     fun getDaftarBencana() : LiveData<Result<List<Bencana>>> {
         resultDaftarBencana.value = Result.Loading
@@ -95,6 +100,30 @@ class Repository private constructor(
         })
 
         return resultKorban
+    }
+
+    fun getDaftarPosko(idBencana: Int) : LiveData<Result<List<Posko>>>{
+        resultDaftarPosko.value = Result.Loading
+        apiService.getDaftarPosko(idBencana).enqueue(object : Callback<List<Posko>> {
+            override fun onResponse(call: Call<List<Posko>>, response: Response<List<Posko>>) {
+                if (response.isSuccessful) {
+                    _responseDaftarPosko.value = response.body()
+                    resultDaftarPosko.addSource(responseDaftarPosko) { res ->
+                        resultDaftarPosko.value = Result.Success(res)
+                    }
+                    resultDaftarPosko.removeSource(responseDaftarPosko)
+                } else {
+                    resultDaftarPosko.value = Result.Error("Error get daftar posko")
+                }
+            }
+
+            override fun onFailure(call: Call<List<Posko>>, t: Throwable) {
+                resultDaftarPosko.value = t.message?.let { Result.Error(it) }
+            }
+
+        })
+
+        return resultDaftarPosko
     }
 
     companion object {

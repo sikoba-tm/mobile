@@ -2,6 +2,7 @@ package com.tekmob.sikoba.data.remote.retrofit
 
 import com.tekmob.sikoba.model.Bencana
 import com.tekmob.sikoba.model.Korban
+import com.tekmob.sikoba.model.Posko
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -26,4 +27,9 @@ interface ApiService {
         @Path("id_bencana") idBencana : Int,
         @Path("id_korban") idKorban : Int
     ) : Call<Korban>
+
+    @GET("bencana/{id_bencana}/posko")
+    fun getDaftarPosko(
+        @Path("id_bencana") idBencana : Int
+    ) : Call<List<Posko>>
 }

@@ -3,22 +3,18 @@ package com.tekmob.sikoba.ui.daftarBencana
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tekmob.sikoba.R
 import com.tekmob.sikoba.data.Result
 import com.tekmob.sikoba.databinding.FragmentDaftarBencanaBinding
 import com.tekmob.sikoba.model.Bencana
 import com.tekmob.sikoba.ui.ViewModelFactory
 import com.tekmob.sikoba.ui.adapter.ListBencanaAdapter
 import com.tekmob.sikoba.ui.detailBencana.DetailBencanaActivity
-import com.tekmob.sikoba.ui.detailBencana.DetailBencanaFragment
 
 class DaftarBencanaFragment : Fragment() {
 

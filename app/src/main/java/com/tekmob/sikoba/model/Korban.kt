@@ -1,8 +1,6 @@
 package com.tekmob.sikoba.model
 
 import com.google.gson.annotations.SerializedName
-import com.tekmob.sikoba.data.remote.response.Posko
-import java.util.*
 
 data class Korban(
 

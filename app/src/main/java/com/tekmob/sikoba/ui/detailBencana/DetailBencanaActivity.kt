@@ -17,6 +17,7 @@ import com.tekmob.sikoba.ui.adapter.ListKorbanAdapter
 import com.tekmob.sikoba.data.Result
 import com.tekmob.sikoba.ui.daftarBencana.DaftarBencanaViewModel
 import com.tekmob.sikoba.ui.detailKorban.DetailKorbanActivity
+import com.tekmob.sikoba.ui.tambahKorban.TambahKorbanActivity
 
 class DetailBencanaActivity : AppCompatActivity() {
 
@@ -62,6 +63,12 @@ class DetailBencanaActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+
+        binding.fab.setOnClickListener {
+            val intent = Intent(this@DetailBencanaActivity, TambahKorbanActivity::class.java)
+            intent.putExtra(TambahKorbanActivity.ID_BENCANA, bencana.id)
+            startActivity(intent)
         }
 
     }

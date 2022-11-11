@@ -14,4 +14,40 @@
     <string name="menu_pencarian_tersimpan">Pencarian Tersimpan</string>
 
     <string name="tempat_tanggal_lahir">%1$s, %2$s</string>
+
+    <string name="hint_nama">Nama</string>
+    <string name="hint_tanggal_lahir">Tanggal Lahir</string>
+    <string name="hint_tempat_lahir">Tempat Lahir</string>
+    <string name="hint_ibu">Nama Ibu Kandung</string>
+    <string name="hint_kondisi">Kondisi</string>
+    <string name="hint_posko">Posko</string>
+    <string name="hint_rentang_umur">Rentang Umur</string>
+    <string name="hint_foto_korban">Foto Korban</string>
+    <string name="button_kamera">Kamera</string>
+    <string name="button_galeri">Galeri</string>
+    <string name="tambah">Tambah</string>
+    <string name="capture_image">Capture Image</string>
+    <string name="switch_camera">Switch Camera</string>
+
+    <string name="daftar_korban">Daftar Korban</string>
+    <string name="tambah_korban">Tambah Korban</string>
+
+    <string name="informasi_umum">Informasi Umum</string>
+    <string name="informasi_posko">Informasi Posko</string>
+
+    <string-array name="kondisi">
+        <item>Sehat</item>
+        <item>Luka Ringan</item>
+        <item>Luka Berat</item>
+        <item>Kritis</item>
+    </string-array>
+
+    <string-array name="rentang_umur">
+        <item>Balita</item>
+        <item>Anak-anak</item>
+        <item>Remaja</item>
+        <item>Dewasa</item>
+        <item>Lansia</item>
+    </string-array>
+
 </resources>
