@@ -1,4 +1,4 @@
-package com.tekmob.sikoba.ui.detailBencana
+package com.tekmob.sikoba.ui.petugas.detailBencana
 
 import androidx.lifecycle.ViewModel
 import com.tekmob.sikoba.data.repository.Repository

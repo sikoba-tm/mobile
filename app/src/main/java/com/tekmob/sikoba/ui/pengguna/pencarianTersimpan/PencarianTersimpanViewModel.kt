@@ -1,4 +1,4 @@
-package com.tekmob.sikoba.ui.pencarianTersimpan
+package com.tekmob.sikoba.ui.pengguna.pencarianTersimpan
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.tekmob.sikoba.ui.tambahKorban
+package com.tekmob.sikoba.ui.petugas.tambahKorban
 
 import android.Manifest
 import android.content.Intent
@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -24,7 +23,7 @@ import com.tekmob.sikoba.model.Posko
 import com.tekmob.sikoba.rotateBitmap
 import com.tekmob.sikoba.ui.ViewModelFactory
 import com.tekmob.sikoba.ui.camera.CameraActivity
-import com.tekmob.sikoba.ui.detailKorban.DetailKorbanActivity
+import com.tekmob.sikoba.ui.petugas.detailKorban.DetailKorbanActivity
 import com.tekmob.sikoba.uriToFile
 import java.io.File
 import java.text.SimpleDateFormat

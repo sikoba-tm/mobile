@@ -1,11 +1,9 @@
-package com.tekmob.sikoba.ui.detailBencana
+package com.tekmob.sikoba.ui.petugas.detailBencana
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,9 +13,8 @@ import com.tekmob.sikoba.model.Korban
 import com.tekmob.sikoba.ui.ViewModelFactory
 import com.tekmob.sikoba.ui.adapter.ListKorbanAdapter
 import com.tekmob.sikoba.data.Result
-import com.tekmob.sikoba.ui.daftarBencana.DaftarBencanaViewModel
-import com.tekmob.sikoba.ui.detailKorban.DetailKorbanActivity
-import com.tekmob.sikoba.ui.tambahKorban.TambahKorbanActivity
+import com.tekmob.sikoba.ui.petugas.detailKorban.DetailKorbanActivity
+import com.tekmob.sikoba.ui.petugas.tambahKorban.TambahKorbanActivity
 
 class DetailBencanaActivity : AppCompatActivity() {
 

@@ -35,6 +35,9 @@
     <string name="informasi_umum">Informasi Umum</string>
     <string name="informasi_posko">Informasi Posko</string>
 
+    <string name="logout">Logout</string>
+    <string name="login_sebagai_admin">Login Sebagai Admin</string>
+
     <string-array name="kondisi">
         <item>Sehat</item>
         <item>Luka Ringan</item>
@@ -49,5 +52,6 @@
         <item>Dewasa</item>
         <item>Lansia</item>
     </string-array>
+    <string name="title_activity_petugas_main">PetugasMainActivity</string>
 
 </resources>

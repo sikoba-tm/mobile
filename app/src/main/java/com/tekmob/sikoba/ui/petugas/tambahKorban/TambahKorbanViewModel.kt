@@ -1,4 +1,4 @@
-package com.tekmob.sikoba.ui.tambahKorban
+package com.tekmob.sikoba.ui.petugas.tambahKorban
 
 import androidx.lifecycle.ViewModel
 import com.tekmob.sikoba.data.repository.Repository

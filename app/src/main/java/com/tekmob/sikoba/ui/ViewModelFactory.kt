@@ -3,10 +3,11 @@ package com.tekmob.sikoba.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.tekmob.sikoba.di.Injection
-import com.tekmob.sikoba.ui.daftarBencana.DaftarBencanaViewModel
-import com.tekmob.sikoba.ui.detailBencana.DetailBencanaViewModel
-import com.tekmob.sikoba.ui.detailKorban.DetailKorbanViewModel
-import com.tekmob.sikoba.ui.tambahKorban.TambahKorbanViewModel
+import com.tekmob.sikoba.ui.pengguna.daftarBencana.DaftarBencanaViewModel
+import com.tekmob.sikoba.ui.petugas.daftarBencana.DaftarBencanaPetugasViewModel
+import com.tekmob.sikoba.ui.petugas.detailBencana.DetailBencanaViewModel
+import com.tekmob.sikoba.ui.petugas.detailKorban.DetailKorbanViewModel
+import com.tekmob.sikoba.ui.petugas.tambahKorban.TambahKorbanViewModel
 
 class ViewModelFactory : ViewModelProvider.NewInstanceFactory() {
 
@@ -24,6 +25,9 @@ class ViewModelFactory : ViewModelProvider.NewInstanceFactory() {
             }
             modelClass.isAssignableFrom(TambahKorbanViewModel::class.java) -> {
                 TambahKorbanViewModel(Injection.provideRepository()) as T
+            }
+            modelClass.isAssignableFrom(DaftarBencanaPetugasViewModel::class.java) -> {
+                DaftarBencanaPetugasViewModel(Injection.provideRepository()) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

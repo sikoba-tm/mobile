@@ -1,19 +1,16 @@
-package com.tekmob.sikoba.ui.detailKorban
+package com.tekmob.sikoba.ui.petugas.detailKorban
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.tekmob.sikoba.R
 import com.tekmob.sikoba.data.Result
-import com.tekmob.sikoba.databinding.ActivityDetailBencanaBinding
 import com.tekmob.sikoba.databinding.ActivityDetailKorbanBinding
 import com.tekmob.sikoba.model.Korban
 import com.tekmob.sikoba.ui.ViewModelFactory
-import com.tekmob.sikoba.ui.detailBencana.DetailBencanaViewModel
 
 class DetailKorbanActivity : AppCompatActivity() {
 

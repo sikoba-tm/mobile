@@ -15,7 +15,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.tekmob.sikoba.createFile
 import com.tekmob.sikoba.databinding.ActivityCameraBinding
-import com.tekmob.sikoba.ui.tambahKorban.TambahKorbanActivity
+import com.tekmob.sikoba.ui.petugas.tambahKorban.TambahKorbanActivity
 
 class CameraActivity : AppCompatActivity() {
 
