@@ -8,7 +8,10 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.util.Log
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -20,11 +23,18 @@ import com.tekmob.sikoba.R
 import com.tekmob.sikoba.data.Result
 import com.tekmob.sikoba.databinding.ActivityTambahKorbanBinding
 import com.tekmob.sikoba.model.Posko
+import com.tekmob.sikoba.reduceFileImage
 import com.tekmob.sikoba.rotateBitmap
 import com.tekmob.sikoba.ui.ViewModelFactory
 import com.tekmob.sikoba.ui.camera.CameraActivity
 import com.tekmob.sikoba.ui.petugas.detailKorban.DetailKorbanActivity
 import com.tekmob.sikoba.uriToFile
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -34,6 +44,9 @@ class TambahKorbanActivity : AppCompatActivity() {
     private lateinit var binding : ActivityTambahKorbanBinding
     private lateinit var viewModel: TambahKorbanViewModel
     private lateinit var listPosko: List<Posko>
+    private var selectedPoskoPosition: Int = 0
+    private var idBencana: Int = 0
+
     private var getFile: File? = null
     private val launcherIntentCameraX =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult())
@@ -77,6 +90,7 @@ class TambahKorbanActivity : AppCompatActivity() {
             )
         }
 
+        idBencana = intent.getIntExtra(DetailKorbanActivity.ID_BENCANA, 0)
 
         setupViewModel()
         setupAction()
@@ -85,7 +99,6 @@ class TambahKorbanActivity : AppCompatActivity() {
 
     private fun setupViewModel(){
         viewModel = ViewModelProvider(this, ViewModelFactory())[TambahKorbanViewModel::class.java]
-        val idBencana = intent.getIntExtra(DetailKorbanActivity.ID_BENCANA, 0)
 
         viewModel.getDaftarPosko(idBencana).observe(this) { res ->
             when(res) {
@@ -95,12 +108,19 @@ class TambahKorbanActivity : AppCompatActivity() {
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     listPosko = res.data
-                    val listNamaPosko = mutableListOf<String>()
-                    listPosko.forEach { posko ->
-                        posko.nama?.let { listNamaPosko.add(it) }
-                    }
-                    val poskoArrayAdapter = ArrayAdapter(this, R.layout.dropdown_textview, listNamaPosko)
+                    val poskoArrayAdapter = ArrayAdapter(this, R.layout.dropdown_textview, listPosko.map { it.nama })
                     binding.editPosko.setAdapter(poskoArrayAdapter)
+                    binding.editPosko.onItemClickListener = object : AdapterView.OnItemClickListener {
+                        override fun onItemClick(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                        ) {
+                            selectedPoskoPosition = position
+                        }
+
+                    }
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
@@ -144,6 +164,8 @@ class TambahKorbanActivity : AppCompatActivity() {
         binding.buttonKamera.setOnClickListener { startCamera() }
         binding.buttonGaleri.setOnClickListener { startGallery() }
 
+        binding.buttonTambah.setOnClickListener { tambahKorban() }
+
     }
 
     private fun startCamera(){
@@ -163,6 +185,68 @@ class TambahKorbanActivity : AppCompatActivity() {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
 
+    private fun tambahKorban(){
+
+        val data = mutableMapOf<String, RequestBody>()
+        data["nama"] = binding.editNama.text.toString().toRequestBody("text/plain".toMediaType())
+        data["tempat_lahir"] = toRequestBody(binding.editTempatLahir.text)
+        data["tanggal_lahir"] = toRequestBody(binding.editTanggalLahir.text)
+        data["rentang_usia"] = toRequestBody(binding.editRentangUmur.text)
+        data["nama_ibu_kandung"] = toRequestBody(binding.editIbu.text)
+        data["kondisi"] = toRequestBody(binding.editKondisi.text)
+        val idPosko = listPosko[selectedPoskoPosition].iD
+
+        val file = reduceFileImage(getFile as File)
+        val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        val imageMultipart = MultipartBody.Part.createFormData(
+            "foto",
+            file.name,
+            requestImageFile
+        )
+
+        if (idPosko != null) {
+            viewModel.tambahKorban(idBencana, idPosko, imageMultipart, data).observe(this) {
+                when(it){
+                    is Result.Loading -> binding.progressBar.visibility = View.VISIBLE
+                    is Result.Success -> {
+                        binding.progressBar.visibility = View.GONE
+                        val korban = it.data
+                        AlertDialog.Builder(this).apply {
+                            setTitle("Berhasil!")
+                            setMessage("Data korban berhasil ditambahkan")
+                            setPositiveButton("Lihat Detail Korban") { _,_ ->
+                                val intent = Intent(this@TambahKorbanActivity, DetailKorbanActivity::class.java)
+                                intent.putExtra(DetailKorbanActivity.ID_KORBAN, korban.id)
+                                intent.putExtra(DetailKorbanActivity.ID_BENCANA, idBencana)
+                                startActivity(intent)
+                                finish()
+                            }
+                            create()
+                            show()
+                        }
+                    }
+                    is Result.Error -> {
+                        binding.progressBar.visibility = View.GONE
+                        AlertDialog.Builder(this).apply {
+                            setTitle("Gagal!")
+                            setMessage("Terjadi kesalahan")
+                            setNegativeButton("Tutup") { _, _ ->
+                            }
+                            create()
+                            show()
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    private fun toRequestBody(editable: Editable?) =
+        editable.toString().toRequestBody("text/plain".toMediaType())
+
+
+
     companion object{
         const val ID_BENCANA = "id_bencana"
         const val CAMERA_X_RESULT = 200
@@ -170,5 +254,6 @@ class TambahKorbanActivity : AppCompatActivity() {
         private const val REQUEST_CODE_PERMISSIONS = 10
         const val PICTURE = "picture"
         const val IS_BACK_CAMERA = "isBackCamera"
+        private const val TAG = "TambahKorbanActivity"
     }
 }

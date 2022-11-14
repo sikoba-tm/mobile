@@ -7,13 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tekmob.sikoba.databinding.BencanaCardBinding
 import com.tekmob.sikoba.model.Bencana
 
-class ListBencanaAdapter(private val listBencana : List<Bencana>) :
-    RecyclerView.Adapter<ListBencanaAdapter.ListBencanaHolder>() {
+class ListBencanaAdapter(private val listBencana : List<Bencana>) : RecyclerView.Adapter<ListBencanaAdapter.ListBencanaHolder>() {
 
     private lateinit var onItemClickCallback : OnItemClickCallback
 
-    inner class ListBencanaHolder(var binding : BencanaCardBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    inner class ListBencanaHolder(var binding : BencanaCardBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListBencanaHolder {
         val binding = BencanaCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)

@@ -8,6 +8,9 @@ import com.tekmob.sikoba.data.Result
 import com.tekmob.sikoba.model.Bencana
 import com.tekmob.sikoba.model.Korban
 import com.tekmob.sikoba.model.Posko
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,6 +34,10 @@ class Repository private constructor(
     private val resultDaftarPosko = MediatorLiveData<Result<List<Posko>>>()
     private val _responseDaftarPosko = MutableLiveData<List<Posko>>()
     private val responseDaftarPosko : LiveData<List<Posko>> = _responseDaftarPosko
+
+    private val resultTambahKorban = MediatorLiveData<Result<Korban>>()
+    private val _responseTambahKorban = MutableLiveData<Korban>()
+    private val responseTambahKorban : LiveData<Korban> = _responseTambahKorban
 
     fun getDaftarBencana() : LiveData<Result<List<Bencana>>> {
         resultDaftarBencana.value = Result.Loading
@@ -124,6 +131,35 @@ class Repository private constructor(
         })
 
         return resultDaftarPosko
+    }
+
+    fun tambahKorban(
+        idBencana: Int,
+        idPosko: Int,
+        foto: MultipartBody.Part,
+        data: Map<String, RequestBody>
+    ) : LiveData<Result<Korban>> {
+        resultTambahKorban.value = Result.Loading
+        apiService.tambahKorban(idBencana, idPosko, foto, data).enqueue(object : Callback<Korban> {
+            override fun onResponse(call: Call<Korban>, response: Response<Korban>) {
+                if (response.isSuccessful) {
+                    _responseTambahKorban.value = response.body()
+                    resultTambahKorban.addSource(responseTambahKorban) { res ->
+                        resultTambahKorban.value = Result.Success(res)
+                    }
+                    resultTambahKorban.removeSource(responseTambahKorban)
+                } else {
+                    resultTambahKorban.value = Result.Error("Error tambah korban")
+                }
+            }
+
+            override fun onFailure(call: Call<Korban>, t: Throwable) {
+                resultTambahKorban.value = t.message?.let { Result.Error(it) }
+            }
+
+        })
+
+        return resultTambahKorban
     }
 
     companion object {

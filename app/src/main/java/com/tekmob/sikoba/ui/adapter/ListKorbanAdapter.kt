@@ -1,6 +1,7 @@
 package com.tekmob.sikoba.ui.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
@@ -27,6 +28,7 @@ RecyclerView.Adapter<ListKorbanAdapter.ListKorbanHolder>()
 
     override fun onBindViewHolder(holder: ListKorbanHolder, position: Int) {
         val korban = listKorban[position]
+        Log.d(TAG, "${korban.nama}")
         holder.apply {
             binding.apply {
                 nama.text = korban.nama
@@ -53,5 +55,9 @@ RecyclerView.Adapter<ListKorbanAdapter.ListKorbanHolder>()
 
     interface OnItemClickCallback{
         fun onItemClicked(data : Korban)
+    }
+
+    companion object {
+        private const val TAG = "ListKorbanAdapter"
     }
 }
