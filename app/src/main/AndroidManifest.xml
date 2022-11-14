@@ -20,6 +20,16 @@
         android:theme="@style/Theme.SIKOBA"
         tools:targetApi="31">
         <activity
+            android:name=".ui.pengguna.detailHasilPencarian.DetailHasilPencarianActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".ui.pengguna.cariKorban.CariKorbanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.pengguna.hasilPencarian.HasilPencarianActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.petugas.PetugasMainActivity"
             android:exported="false"
             android:label="@string/title_activity_petugas_main"
