@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tekmob.sikoba.data.Result
@@ -73,9 +74,7 @@ class DaftarBencanaFragment : Fragment() {
         binding.rvBencana.adapter = adapter
         adapter.setOnItemClickCallback(object : ListBencanaAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Bencana) {
-                val detailBencanaIntent = Intent(context, DetailBencanaActivity::class.java)
-                detailBencanaIntent.putExtra(DetailBencanaActivity.BENCANA, data)
-                startActivity(detailBencanaIntent)
+                Toast.makeText(requireContext(), "Clicked " + data.nama, Toast.LENGTH_SHORT).show()
             }
         })
     }

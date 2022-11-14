@@ -74,7 +74,9 @@ class DaftarBencanaPetugasFragment : Fragment() {
         binding.rvBencana.adapter = adapter
         adapter.setOnItemClickCallback(object : ListBencanaAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Bencana) {
-                Toast.makeText(requireContext(), "Clicked " + data.nama, Toast.LENGTH_SHORT).show()
+                val detailBencanaIntent = Intent(context, DetailBencanaActivity::class.java)
+                detailBencanaIntent.putExtra(DetailBencanaActivity.BENCANA, data)
+                startActivity(detailBencanaIntent)
             }
         })
     }

@@ -41,11 +41,12 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        binding.login.setOnClickListener{
-            val intent = Intent(this@MainActivity, PetugasMainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+//        binding.login.setOnClickListener{
+//            val intent = Intent(this@MainActivity, PetugasMainActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
