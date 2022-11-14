@@ -71,6 +71,11 @@ class DetailBencanaActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        bencana.id?.let { viewModel.getDaftarKorban(it) }
+    }
+
     private fun setBencana(bencana: Bencana){
         binding.bencanaCard.apply {
             nama.text = bencana.nama

@@ -9,7 +9,6 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -90,7 +89,7 @@ class TambahKorbanActivity : AppCompatActivity() {
             )
         }
 
-        idBencana = intent.getIntExtra(DetailKorbanActivity.ID_BENCANA, 0)
+        idBencana = intent.getIntExtra(ID_BENCANA, 0)
 
         setupViewModel()
         setupAction()
@@ -188,7 +187,7 @@ class TambahKorbanActivity : AppCompatActivity() {
     private fun tambahKorban(){
 
         val data = mutableMapOf<String, RequestBody>()
-        data["nama"] = binding.editNama.text.toString().toRequestBody("text/plain".toMediaType())
+        data["nama"] = toRequestBody(binding.editNama.text)
         data["tempat_lahir"] = toRequestBody(binding.editTempatLahir.text)
         data["tanggal_lahir"] = toRequestBody(binding.editTanggalLahir.text)
         data["rentang_usia"] = toRequestBody(binding.editRentangUmur.text)

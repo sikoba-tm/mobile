@@ -38,6 +38,9 @@
     <string name="logout">Logout</string>
     <string name="login_sebagai_admin">Login Sebagai Admin</string>
 
+    <string name="ubah_data">Ubah Data</string>
+    <string name="hapus_data">Hapus Data</string>
+
     <string-array name="kondisi">
         <item>Sehat</item>
         <item>Luka Ringan</item>

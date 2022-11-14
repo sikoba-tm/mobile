@@ -5,6 +5,8 @@ import com.tekmob.sikoba.model.Korban
 import com.tekmob.sikoba.model.Posko
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.Response
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -42,4 +44,10 @@ interface ApiService {
         @Part foto: MultipartBody.Part,
         @PartMap data : Map<String, @JvmSuppressWildcards RequestBody>
     ) : Call<Korban>
+
+    @DELETE("/bencana/{id_bencana}/korban/{id_korban}/")
+    fun hapusKorban(
+        @Path("id_bencana") idBencana : Int,
+        @Path("id_korban") idKorban : Int
+    ) : Call<ResponseBody>
 }

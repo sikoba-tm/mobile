@@ -1,5 +1,6 @@
 package com.tekmob.sikoba.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -160,6 +161,19 @@ class Repository private constructor(
         })
 
         return resultTambahKorban
+    }
+
+    fun hapusKorban(idBencana: Int, idKorban : Int){
+        apiService.hapusKorban(idBencana, idKorban).enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                Log.d("Repository", "Success hapus")
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                t.message?.let { Log.e("Repository", it) }
+            }
+
+        })
     }
 
     companion object {

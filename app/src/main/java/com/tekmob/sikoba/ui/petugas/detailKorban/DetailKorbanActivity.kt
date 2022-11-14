@@ -1,5 +1,6 @@
 package com.tekmob.sikoba.ui.petugas.detailKorban
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -16,6 +17,8 @@ class DetailKorbanActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailKorbanBinding
     private lateinit var viewModel: DetailKorbanViewModel
+    private var idBencana: Int = 0
+    private var idKorban: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,10 +26,19 @@ class DetailKorbanActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.title = "Detail Korban"
+        idBencana = intent.getIntExtra(ID_BENCANA, 0)
+        idKorban = intent.getIntExtra(ID_KORBAN, 0)
 
+        setupViewModel()
+        setupAction()
+    }
+
+    fun setupAction(){
+        binding.buttonHapus.setOnClickListener { hapusKorban() }
+    }
+
+    fun setupViewModel(){
         viewModel = ViewModelProvider(this, ViewModelFactory())[DetailKorbanViewModel::class.java]
-        val idBencana = intent.getIntExtra(ID_BENCANA, 0)
-        val idKorban = intent.getIntExtra(ID_KORBAN, 0)
         viewModel.getKorban(idBencana, idKorban).observe(this){ res ->
             when(res){
                 is Result.Loading -> {
@@ -42,12 +54,28 @@ class DetailKorbanActivity : AppCompatActivity() {
                         setTitle("Gagal!")
                         setMessage("Terjadi kesalahan")
                         setNegativeButton("Tutup") { _, _ ->
+                            finish()
                         }
                         create()
                         show()
                     }
                 }
             }
+        }
+    }
+
+    fun hapusKorban(){
+        AlertDialog.Builder(this).apply {
+            setTitle("Peringatan!")
+            setMessage("Anda yakin ingin menghapus data korban?")
+            setPositiveButton("Hapus") { _,_ ->
+                viewModel.hapusKorban(idBencana, idKorban)
+                finish()
+            }
+            setNegativeButton("Kembali") { _, _ ->
+            }
+            create()
+            show()
         }
     }
 

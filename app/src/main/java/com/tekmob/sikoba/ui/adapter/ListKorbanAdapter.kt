@@ -28,7 +28,6 @@ RecyclerView.Adapter<ListKorbanAdapter.ListKorbanHolder>()
 
     override fun onBindViewHolder(holder: ListKorbanHolder, position: Int) {
         val korban = listKorban[position]
-        Log.d(TAG, "${korban.nama}")
         holder.apply {
             binding.apply {
                 nama.text = korban.nama
