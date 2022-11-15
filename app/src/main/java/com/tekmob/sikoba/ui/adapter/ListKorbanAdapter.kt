@@ -1,6 +1,7 @@
 package com.tekmob.sikoba.ui.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
@@ -53,5 +54,9 @@ RecyclerView.Adapter<ListKorbanAdapter.ListKorbanHolder>()
 
     interface OnItemClickCallback{
         fun onItemClicked(data : Korban)
+    }
+
+    companion object {
+        private const val TAG = "ListKorbanAdapter"
     }
 }

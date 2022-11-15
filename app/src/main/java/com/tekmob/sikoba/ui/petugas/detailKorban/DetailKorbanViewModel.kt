@@ -6,5 +6,5 @@ import com.tekmob.sikoba.data.repository.Repository
 class DetailKorbanViewModel(private val repository: Repository) : ViewModel() {
 
     fun getKorban(idBencana : Int, idKorban: Int) = repository.getKorban(idBencana, idKorban)
-
+    fun hapusKorban(idBencana: Int, idKorban: Int) = repository.hapusKorban(idBencana, idKorban)
 }

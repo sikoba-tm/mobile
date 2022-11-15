@@ -2,8 +2,8 @@
     <string name="app_name">SIKOBA</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Tejo Sutejo</string>
-    <string name="nav_header_subtitle">tejo_sutejo@sikoba.com</string>
+    <string name="nav_header_title">SIKOBA</string>
+    <string name="nav_header_subtitle">Sistem Informasi Pencarian Korban Bencana Alam</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -39,6 +39,9 @@
 
     <string name="logout">Logout</string>
     <string name="login_sebagai_admin">Login Sebagai Admin</string>
+
+    <string name="ubah_data">Ubah Data</string>
+    <string name="hapus_data">Hapus Data</string>
 
     <string-array name="kondisi">
         <item>Sehat</item>

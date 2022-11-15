@@ -10,4 +10,11 @@
         android:name="com.tekmob.sikoba.ui.petugas.daftarBencana.DaftarBencanaPetugasFragment"
         android:label="@string/menu_daftar_bencana"
         tools:layout="@layout/fragment_daftar_bencana_petugas" />
+
+    <activity
+        android:id="@+id/nav_logout"
+        android:name="com.tekmob.sikoba.ui.pengguna.MainActivity"
+        android:label="@string/logout"
+        tools:layout="@layout/fragment_daftar_bencana"
+        />
 </navigation>
