@@ -15,7 +15,9 @@ import com.tekmob.sikoba.databinding.FragmentDaftarBencanaBinding
 import com.tekmob.sikoba.model.Bencana
 import com.tekmob.sikoba.ui.ViewModelFactory
 import com.tekmob.sikoba.ui.adapter.ListBencanaAdapter
+import com.tekmob.sikoba.ui.pengguna.cariKorban.CariKorbanActivity
 import com.tekmob.sikoba.ui.petugas.detailBencana.DetailBencanaActivity
+import com.tekmob.sikoba.ui.petugas.tambahKorban.TambahKorbanActivity
 
 class DaftarBencanaFragment : Fragment() {
 
@@ -74,7 +76,12 @@ class DaftarBencanaFragment : Fragment() {
         binding.rvBencana.adapter = adapter
         adapter.setOnItemClickCallback(object : ListBencanaAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Bencana) {
-                Toast.makeText(requireContext(), "Clicked " + data.nama, Toast.LENGTH_SHORT).show()
+//                val detailBencanaIntent = Intent(context, DetailBencanaActivity::class.java)
+//                detailBencanaIntent.putExtra(DetailBencanaActivity.BENCANA, data)
+//                startActivity(detailBencanaIntent)
+                val cariKorbanIntent = Intent(context, CariKorbanActivity::class.java)
+                cariKorbanIntent.putExtra(BENCANA, data)
+                startActivity(cariKorbanIntent)
             }
         })
     }
@@ -87,6 +94,7 @@ class DaftarBencanaFragment : Fragment() {
 
     companion object {
         private const val TAG = "DaftarBencanaFragment"
+        const val BENCANA = "bencana"
     }
 
 }

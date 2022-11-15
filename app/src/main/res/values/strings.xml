@@ -26,11 +26,13 @@
     <string name="button_kamera">Kamera</string>
     <string name="button_galeri">Galeri</string>
     <string name="tambah">Tambah</string>
+    <string name="cari">Cari</string>
     <string name="capture_image">Capture Image</string>
     <string name="switch_camera">Switch Camera</string>
 
     <string name="daftar_korban">Daftar Korban</string>
     <string name="tambah_korban">Tambah Korban</string>
+    <string name="simpan_data_korban">Simpan Data Korban</string>
 
     <string name="informasi_umum">Informasi Umum</string>
     <string name="informasi_posko">Informasi Posko</string>
