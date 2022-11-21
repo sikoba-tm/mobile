@@ -42,6 +42,7 @@
 
     <string name="ubah_data">Ubah Data</string>
     <string name="hapus_data">Hapus Data</string>
+    <string name="not_found">Data Tidak Ditemukan</string>
 
     <string name="username">Username</string>
     <string name="password">Password</string>
