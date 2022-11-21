@@ -50,4 +50,12 @@ interface ApiService {
         @Path("id_bencana") idBencana : Int,
         @Path("id_korban") idKorban : String
     ) : Call<ResponseBody>
+
+    @Multipart
+    @POST("/bencana/{id_bencana}/korban/search")
+    fun cariKorban(
+        @Path("id_bencana") idBencana: Int,
+        @Part foto: MultipartBody.Part,
+        @PartMap data : Map<String, @JvmSuppressWildcards RequestBody>
+    ) : Call<List<Korban>>
 }

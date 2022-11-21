@@ -40,6 +40,10 @@ class Repository private constructor(
     private val _responseTambahKorban = MutableLiveData<Korban>()
     private val responseTambahKorban : LiveData<Korban> = _responseTambahKorban
 
+    private val resultCariKorban = MediatorLiveData<Result<List<Korban>>>()
+    private val _responseCariKorban = MutableLiveData<List<Korban>>()
+    private val responseCariKorban : LiveData<List<Korban>> = _responseCariKorban
+
     fun getDaftarBencana() : LiveData<Result<List<Bencana>>> {
         resultDaftarBencana.value = Result.Loading
         val client = apiService.getDaftarBencana()
@@ -174,6 +178,32 @@ class Repository private constructor(
             }
 
         })
+    }
+
+    fun cariKorban(
+        idBencana: Int,
+        foto: MultipartBody.Part,
+        data: Map<String, RequestBody>
+    ) : LiveData<Result<List<Korban>>> {
+        resultCariKorban.value = Result.Loading
+        apiService.cariKorban(idBencana, foto, data).enqueue(object : Callback<List<Korban>> {
+            override fun onResponse(call: Call<List<Korban>>, response: Response<List<Korban>>) {
+                if (response.isSuccessful) {
+                    _responseCariKorban.value = response.body()
+                    resultCariKorban.addSource(responseCariKorban) { res ->
+                        resultCariKorban.value = Result.Success(res)
+                    }
+                    resultCariKorban.removeSource(responseCariKorban)
+                } else {
+                    resultCariKorban.value = Result.Error("Error cari korban")
+                }
+            }
+
+            override fun onFailure(call: Call<List<Korban>>, t: Throwable) {
+                resultCariKorban.value = t.message?.let { Result.Error(it) }
+            }
+        })
+        return resultCariKorban
     }
 
     companion object {

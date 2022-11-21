@@ -7,19 +7,32 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
+import android.text.Editable
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.tekmob.sikoba.auth.UserPreference
 import com.tekmob.sikoba.dataStore
+import com.tekmob.sikoba.data.Result
 import com.tekmob.sikoba.databinding.ActivityCariKorbanBinding
 import com.tekmob.sikoba.model.Bencana
+import com.tekmob.sikoba.model.Korban
+import com.tekmob.sikoba.reduceFileImage
 import com.tekmob.sikoba.rotateBitmap
 import com.tekmob.sikoba.ui.ViewModelFactory
 import com.tekmob.sikoba.ui.camera.CameraActivity
 import com.tekmob.sikoba.ui.pengguna.hasilPencarian.HasilPencarianActivity
 import com.tekmob.sikoba.uriToFile
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
 class CariKorbanActivity : AppCompatActivity() {
@@ -93,10 +106,52 @@ class CariKorbanActivity : AppCompatActivity() {
         launcherIntentGallery.launch(chooser)
     }
 
-    private fun cariKorban() {
-        val intent = Intent(this@CariKorbanActivity, HasilPencarianActivity::class.java)
-        intent.putExtra(BENCANA, bencana)
-        startActivity(intent)
+    private fun toRequestBody(editable: Editable?): RequestBody {
+        return editable.toString().toRequestBody("text/plain".toMediaType())
+    }
+
+    private fun cariKorban(){
+        val data = mutableMapOf<String, RequestBody>()
+        data["nama"] = toRequestBody(binding.editUsername.text)
+        if (getFile == null) {
+            AlertDialog.Builder(this).apply {
+                setMessage("Harap Masukkan Foto")
+                setNegativeButton("Tutup") { _, _ ->
+                }
+                create()
+                show()
+            }
+            return
+        }
+        val file = reduceFileImage(getFile as File)
+        val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        val imageMultipart = MultipartBody.Part.createFormData(
+            "foto",
+            file.name,
+            requestImageFile
+        )
+
+        bencana.id?.let { bencanaId ->
+            viewModel.cariKorban(bencanaId, imageMultipart, data).observe(this) {
+                val intent = Intent(this@CariKorbanActivity, HasilPencarianActivity::class.java)
+                when(it){
+                    is Result.Loading -> binding.progressBar.visibility = View.VISIBLE
+                    is Result.Success -> {
+                        binding.progressBar.visibility = View.GONE
+                        val lk = ArrayList<Korban>(it.data)
+                        intent.putParcelableArrayListExtra(LIST_KORBAN, lk as java.util.ArrayList<Parcelable>);
+                        intent.putExtra(BENCANA, bencana)
+                        startActivity(intent)
+                    }
+                    is Result.Error -> {
+                        binding.progressBar.visibility = View.GONE
+                        intent.putParcelableArrayListExtra(LIST_KORBAN, ArrayList<Parcelable>());
+                        intent.putExtra(BENCANA, bencana)
+                        startActivity(intent)
+                    }
+                }
+            }
+        }
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
@@ -105,6 +160,7 @@ class CariKorbanActivity : AppCompatActivity() {
 
     companion object {
         const val BENCANA = "bencana"
+        const val LIST_KORBAN = "list_korban"
         const val CAMERA_X_RESULT = 200
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
