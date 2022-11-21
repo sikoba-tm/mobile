@@ -7,7 +7,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tekmob.sikoba.auth.UserPreference
 import com.tekmob.sikoba.data.Result
+import com.tekmob.sikoba.dataStore
 import com.tekmob.sikoba.databinding.ActivityHasilPencarianBinding
 import com.tekmob.sikoba.model.Bencana
 import com.tekmob.sikoba.model.Korban
@@ -27,7 +29,7 @@ class HasilPencarianActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Hasil Pencarian"
 
-        viewModel = ViewModelProvider(this, ViewModelFactory())[HasilPencarianViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory(UserPreference.getInstance(dataStore)))[HasilPencarianViewModel::class.java]
 
         val layoutManager = LinearLayoutManager(this)
         binding.rvKorban.layoutManager = layoutManager

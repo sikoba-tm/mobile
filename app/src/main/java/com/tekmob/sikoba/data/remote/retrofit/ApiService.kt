@@ -28,7 +28,7 @@ interface ApiService {
     @GET("/bencana/{id_bencana}/korban/{id_korban}")
     fun getDetailKorban(
         @Path("id_bencana") idBencana : Int,
-        @Path("id_korban") idKorban : Int
+        @Path("id_korban") idKorban : String
     ) : Call<Korban>
 
     @GET("/bencana/{id_bencana}/posko")
@@ -48,6 +48,6 @@ interface ApiService {
     @DELETE("/bencana/{id_bencana}/korban/{id_korban}/")
     fun hapusKorban(
         @Path("id_bencana") idBencana : Int,
-        @Path("id_korban") idKorban : Int
+        @Path("id_korban") idKorban : String
     ) : Call<ResponseBody>
 }

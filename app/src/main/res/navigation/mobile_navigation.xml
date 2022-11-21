@@ -19,9 +19,9 @@
 
     <activity
         android:id="@+id/nav_login_admin"
-        android:name="com.tekmob.sikoba.ui.petugas.PetugasMainActivity"
+        android:name="com.tekmob.sikoba.ui.login.LoginActivity"
         android:label="@string/login_sebagai_admin"
-        tools:layout="@layout/fragment_daftar_bencana_petugas"
+        tools:layout="@layout/activity_login"
         />
 
 </navigation>

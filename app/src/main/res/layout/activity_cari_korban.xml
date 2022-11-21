@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="198dp" />
+                app:layout_constraintGuide_percent="0.5" />
 
             <ImageView
                 android:contentDescription="@string/hint_foto_korban"
@@ -42,6 +42,7 @@
                 android:id="@+id/button_kamera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="?attr/colorPrimaryVariant"
                 android:textColor="@color/white"
                 android:drawableLeft="@drawable/ic_baseline_camera_alt_24"
                 android:padding="10dp"
@@ -54,6 +55,7 @@
                 android:id="@+id/button_galeri"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="?attr/colorPrimaryVariant"
                 android:drawableLeft="@drawable/ic_baseline_photo_library_24"
                 android:padding="10dp"
                 android:text="@string/button_galeri"
@@ -63,7 +65,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/foto_korban" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layout_nama"
+                android:id="@+id/layout_username"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:boxStrokeColor="@color/dark_green"
                 app:boxStrokeWidth="2dp"
@@ -81,7 +83,7 @@
                 android:padding="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_nama"
+                    android:id="@+id/edit_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dark_green"
@@ -95,12 +97,13 @@
                 android:layout_marginTop="20dp"
                 android:paddingHorizontal="120dp"
                 android:paddingVertical="10dp"
+                android:backgroundTint="?attr/colorPrimaryVariant"
                 android:text="@string/cari"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_nama" />
+                app:layout_constraintTop_toBottomOf="@+id/layout_username" />
 
             <ProgressBar
                 android:id="@+id/progress_bar"

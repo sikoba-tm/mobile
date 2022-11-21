@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.tekmob.sikoba.R
+import com.tekmob.sikoba.auth.UserPreference
 import com.tekmob.sikoba.data.Result
+import com.tekmob.sikoba.dataStore
 import com.tekmob.sikoba.databinding.ActivityDetailHasilPencarianBinding
 import com.tekmob.sikoba.databinding.ActivityDetailKorbanBinding
 import com.tekmob.sikoba.databinding.ActivityHasilPencarianBinding
@@ -28,9 +30,9 @@ class DetailHasilPencarianActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Detail Korban"
 
-        viewModel = ViewModelProvider(this, ViewModelFactory())[DetailHasilPencarianViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory(UserPreference.getInstance(dataStore)))[DetailHasilPencarianViewModel::class.java]
         val idBencana = intent.getIntExtra(ID_BENCANA, 0)
-        val idKorban = intent.getIntExtra(ID_KORBAN, 0)
+        val idKorban = intent.getStringExtra(ID_KORBAN) as String
         viewModel.getKorban(idBencana, idKorban).observe(this){ res ->
             when(res){
                 is Result.Loading -> {

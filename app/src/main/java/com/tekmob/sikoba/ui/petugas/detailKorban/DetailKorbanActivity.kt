@@ -8,7 +8,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.tekmob.sikoba.R
+import com.tekmob.sikoba.auth.UserPreference
 import com.tekmob.sikoba.data.Result
+import com.tekmob.sikoba.dataStore
 import com.tekmob.sikoba.databinding.ActivityDetailKorbanBinding
 import com.tekmob.sikoba.model.Korban
 import com.tekmob.sikoba.ui.ViewModelFactory
@@ -18,7 +20,7 @@ class DetailKorbanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailKorbanBinding
     private lateinit var viewModel: DetailKorbanViewModel
     private var idBencana: Int = 0
-    private var idKorban: Int = 0
+    private lateinit var idKorban: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +29,7 @@ class DetailKorbanActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Detail Korban"
         idBencana = intent.getIntExtra(ID_BENCANA, 0)
-        idKorban = intent.getIntExtra(ID_KORBAN, 0)
+        idKorban = intent.getStringExtra(ID_KORBAN) as String
 
         setupViewModel()
         setupAction()
@@ -38,7 +40,7 @@ class DetailKorbanActivity : AppCompatActivity() {
     }
 
     fun setupViewModel(){
-        viewModel = ViewModelProvider(this, ViewModelFactory())[DetailKorbanViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory(UserPreference.getInstance(dataStore)))[DetailKorbanViewModel::class.java]
         viewModel.getKorban(idBencana, idKorban).observe(this){ res ->
             when(res){
                 is Result.Loading -> {

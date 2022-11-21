@@ -29,7 +29,7 @@ data class Korban(
     val namaIbuKandung: String? = null,
 
     @field:SerializedName("ID")
-    val id: Int? = null,
+    val id: String? = null,
 
     @field:SerializedName("UpdatedAt")
     val updatedAt: String? = null,

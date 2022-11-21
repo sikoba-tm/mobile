@@ -2,7 +2,10 @@ package com.tekmob.sikoba.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.tekmob.sikoba.auth.UserPreference
+import com.tekmob.sikoba.dataStore
 import com.tekmob.sikoba.di.Injection
+import com.tekmob.sikoba.ui.login.LoginViewModel
 import com.tekmob.sikoba.ui.pengguna.cariKorban.CariKorbanViewModel
 import com.tekmob.sikoba.ui.pengguna.daftarBencana.DaftarBencanaViewModel
 import com.tekmob.sikoba.ui.pengguna.detailHasilPencarian.DetailHasilPencarianViewModel
@@ -12,7 +15,7 @@ import com.tekmob.sikoba.ui.petugas.detailBencana.DetailBencanaViewModel
 import com.tekmob.sikoba.ui.petugas.detailKorban.DetailKorbanViewModel
 import com.tekmob.sikoba.ui.petugas.tambahKorban.TambahKorbanViewModel
 
-class ViewModelFactory : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -40,6 +43,9 @@ class ViewModelFactory : ViewModelProvider.NewInstanceFactory() {
             }
             modelClass.isAssignableFrom(DetailHasilPencarianViewModel::class.java) -> {
                 DetailHasilPencarianViewModel(Injection.provideRepository()) as T
+            }
+            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
+                LoginViewModel(pref) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

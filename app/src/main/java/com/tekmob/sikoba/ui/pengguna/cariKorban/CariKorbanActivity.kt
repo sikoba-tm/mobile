@@ -11,6 +11,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.tekmob.sikoba.auth.UserPreference
+import com.tekmob.sikoba.dataStore
 import com.tekmob.sikoba.databinding.ActivityCariKorbanBinding
 import com.tekmob.sikoba.model.Bencana
 import com.tekmob.sikoba.rotateBitmap
@@ -58,7 +60,7 @@ class CariKorbanActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.title = "Cari Korban"
 
-        viewModel = ViewModelProvider(this, ViewModelFactory())[CariKorbanViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory(UserPreference.getInstance(dataStore)))[CariKorbanViewModel::class.java]
         bencana = intent.getParcelableExtra<Bencana>(BENCANA) as Bencana
 
         if (!allPermissionsGranted()) {

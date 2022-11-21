@@ -43,6 +43,11 @@
     <string name="ubah_data">Ubah Data</string>
     <string name="hapus_data">Hapus Data</string>
 
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="masuk_sebagai_admin">Masuk Sebagai Admin</string>
+    <string name="masuk">Masuk</string>
+
     <string-array name="kondisi">
         <item>Sehat</item>
         <item>Luka Ringan</item>

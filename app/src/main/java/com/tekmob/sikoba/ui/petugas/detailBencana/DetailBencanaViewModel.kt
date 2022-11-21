@@ -5,5 +5,5 @@ import com.tekmob.sikoba.data.repository.Repository
 
 class DetailBencanaViewModel(private val repository: Repository) : ViewModel() {
 
-    fun getDaftarKorban(idKorban : Int) = repository.getDaftarKorban(idKorban)
+    fun getDaftarKorban(idBencana : Int) = repository.getDaftarKorban(idBencana)
 }

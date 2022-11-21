@@ -87,7 +87,7 @@ class Repository private constructor(
         return resultDaftarKorban
     }
 
-    fun getKorban(idBencana: Int, idKorban : Int) : LiveData<Result<Korban>>{
+    fun getKorban(idBencana: Int, idKorban : String) : LiveData<Result<Korban>>{
         resultKorban.value = Result.Loading
         apiService.getDetailKorban(idBencana, idKorban).enqueue(object : Callback<Korban> {
             override fun onResponse(call: Call<Korban>, response: Response<Korban>) {
@@ -163,7 +163,7 @@ class Repository private constructor(
         return resultTambahKorban
     }
 
-    fun hapusKorban(idBencana: Int, idKorban : Int){
+    fun hapusKorban(idBencana: Int, idKorban : String){
         apiService.hapusKorban(idBencana, idKorban).enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 Log.d("Repository", "Success hapus")

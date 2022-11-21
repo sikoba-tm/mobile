@@ -10,7 +10,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tekmob.sikoba.auth.UserPreference
 import com.tekmob.sikoba.data.Result
+import com.tekmob.sikoba.dataStore
 import com.tekmob.sikoba.databinding.FragmentDaftarBencanaBinding
 import com.tekmob.sikoba.model.Bencana
 import com.tekmob.sikoba.ui.ViewModelFactory
@@ -31,7 +33,7 @@ class DaftarBencanaFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this, ViewModelFactory())[DaftarBencanaViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory(UserPreference.getInstance(requireContext().dataStore)))[DaftarBencanaViewModel::class.java]
 
         _binding = FragmentDaftarBencanaBinding.inflate(inflater, container, false)
 

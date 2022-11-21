@@ -9,6 +9,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -18,16 +19,14 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.tekmob.sikoba.R
+import com.tekmob.sikoba.*
+import com.tekmob.sikoba.auth.UserPreference
 import com.tekmob.sikoba.data.Result
 import com.tekmob.sikoba.databinding.ActivityTambahKorbanBinding
 import com.tekmob.sikoba.model.Posko
-import com.tekmob.sikoba.reduceFileImage
-import com.tekmob.sikoba.rotateBitmap
 import com.tekmob.sikoba.ui.ViewModelFactory
 import com.tekmob.sikoba.ui.camera.CameraActivity
 import com.tekmob.sikoba.ui.petugas.detailKorban.DetailKorbanActivity
-import com.tekmob.sikoba.uriToFile
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -36,6 +35,8 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class TambahKorbanActivity : AppCompatActivity() {
@@ -97,7 +98,7 @@ class TambahKorbanActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel(){
-        viewModel = ViewModelProvider(this, ViewModelFactory())[TambahKorbanViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory(UserPreference.getInstance(dataStore)))[TambahKorbanViewModel::class.java]
 
         viewModel.getDaftarPosko(idBencana).observe(this) { res ->
             when(res) {
@@ -185,11 +186,12 @@ class TambahKorbanActivity : AppCompatActivity() {
     }
 
     private fun tambahKorban(){
-
         val data = mutableMapOf<String, RequestBody>()
         data["nama"] = toRequestBody(binding.editNama.text)
         data["tempat_lahir"] = toRequestBody(binding.editTempatLahir.text)
-        data["tanggal_lahir"] = toRequestBody(binding.editTanggalLahir.text)
+        data["tanggal_lahir"] =
+            "${strToTimestamp(binding.editTanggalLahir.text.toString())}T00:00:00+07:00"
+                .toRequestBody("text/plain".toMediaType())
         data["rentang_usia"] = toRequestBody(binding.editRentangUmur.text)
         data["nama_ibu_kandung"] = toRequestBody(binding.editIbu.text)
         data["kondisi"] = toRequestBody(binding.editKondisi.text)
@@ -244,7 +246,9 @@ class TambahKorbanActivity : AppCompatActivity() {
     private fun toRequestBody(editable: Editable?) =
         editable.toString().toRequestBody("text/plain".toMediaType())
 
-
+    private fun strToTimestamp(stringDate: String) : String {
+       return SimpleDateFormat("yyyy-MM-dd", Locale.US).format(SimpleDateFormat("dd/MM/yyyy", Locale.US).parse(stringDate))
+    }
 
     companion object{
         const val ID_BENCANA = "id_bencana"

@@ -8,12 +8,14 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tekmob.sikoba.auth.UserPreference
 import com.tekmob.sikoba.databinding.ActivityDetailBencanaBinding
 import com.tekmob.sikoba.model.Bencana
 import com.tekmob.sikoba.model.Korban
 import com.tekmob.sikoba.ui.ViewModelFactory
 import com.tekmob.sikoba.ui.adapter.ListKorbanAdapter
 import com.tekmob.sikoba.data.Result
+import com.tekmob.sikoba.dataStore
 import com.tekmob.sikoba.ui.petugas.detailKorban.DetailKorbanActivity
 import com.tekmob.sikoba.ui.petugas.tambahKorban.TambahKorbanActivity
 
@@ -30,7 +32,7 @@ class DetailBencanaActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Detail Bencana"
 
-        viewModel = ViewModelProvider(this, ViewModelFactory())[DetailBencanaViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory(UserPreference.getInstance(dataStore)))[DetailBencanaViewModel::class.java]
 
         val layoutManager = LinearLayoutManager(this)
         binding.rvKorban.layoutManager = layoutManager
@@ -38,6 +40,17 @@ class DetailBencanaActivity : AppCompatActivity() {
         bencana = intent.getParcelableExtra<Bencana>(BENCANA) as Bencana
         setBencana(bencana)
 
+
+        binding.fab.setOnClickListener {
+            val intent = Intent(this@DetailBencanaActivity, TambahKorbanActivity::class.java)
+            intent.putExtra(TambahKorbanActivity.ID_BENCANA, bencana.id)
+            startActivity(intent)
+        }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
         bencana.id?.let {
             viewModel.getDaftarKorban(it).observe(this){ res ->
                 when(res){
@@ -62,19 +75,12 @@ class DetailBencanaActivity : AppCompatActivity() {
                 }
             }
         }
-
-        binding.fab.setOnClickListener {
-            val intent = Intent(this@DetailBencanaActivity, TambahKorbanActivity::class.java)
-            intent.putExtra(TambahKorbanActivity.ID_BENCANA, bencana.id)
-            startActivity(intent)
-        }
-
     }
 
-    override fun onResume() {
-        super.onResume()
-        bencana.id?.let { viewModel.getDaftarKorban(it) }
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        bencana.id?.let { viewModel.getDaftarKorban(it) }
+//    }
 
     private fun setBencana(bencana: Bencana){
         binding.bencanaCard.apply {
