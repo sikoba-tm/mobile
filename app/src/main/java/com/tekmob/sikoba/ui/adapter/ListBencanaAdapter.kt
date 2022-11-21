@@ -24,7 +24,7 @@ class ListBencanaAdapter(private val listBencana : List<Bencana>) : RecyclerView
             binding.apply {
                 nama.text = bencana.nama
                 lokasi.text = bencana.lokasi
-                tanggalKejadian.text = bencana.tanggalKejadian.toString()
+                tanggalKejadian.text = bencana.tanggalKejadian.toString().slice(IntRange(0,9))
             }
             itemView.setOnClickListener {
                 onItemClickCallback.onItemClicked(

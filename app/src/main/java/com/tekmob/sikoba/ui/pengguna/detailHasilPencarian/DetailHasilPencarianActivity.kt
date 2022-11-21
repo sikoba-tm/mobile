@@ -11,12 +11,8 @@ import com.tekmob.sikoba.auth.UserPreference
 import com.tekmob.sikoba.data.Result
 import com.tekmob.sikoba.dataStore
 import com.tekmob.sikoba.databinding.ActivityDetailHasilPencarianBinding
-import com.tekmob.sikoba.databinding.ActivityDetailKorbanBinding
-import com.tekmob.sikoba.databinding.ActivityHasilPencarianBinding
 import com.tekmob.sikoba.model.Korban
 import com.tekmob.sikoba.ui.ViewModelFactory
-import com.tekmob.sikoba.ui.pengguna.hasilPencarian.HasilPencarianViewModel
-import com.tekmob.sikoba.ui.petugas.detailKorban.DetailKorbanViewModel
 
 class DetailHasilPencarianActivity : AppCompatActivity() {
 
@@ -63,7 +59,7 @@ class DetailHasilPencarianActivity : AppCompatActivity() {
                 .load(korban.foto)
                 .into(binding.foto)
             nama.text = korban.nama
-            tempatTanggalLahir.text = getString(R.string.tempat_tanggal_lahir, (if (korban.tempatLahir == "") "-" else korban.tempatLahir), korban.tangalLahir)
+            tempatTanggalLahir.text = getString(R.string.tempat_tanggal_lahir, (if (korban.tempatLahir == "") "-" else korban.tempatLahir), korban.tanggalLahir?.slice(IntRange(0,9)))
             namaIbuKandung.text = if (korban.namaIbuKandung == "") "-" else korban.namaIbuKandung
             kondisi.text = korban.kondisi
             namaPosko.text = korban.posko?.nama ?: ""

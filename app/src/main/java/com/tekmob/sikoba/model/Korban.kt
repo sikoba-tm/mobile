@@ -1,11 +1,14 @@
 package com.tekmob.sikoba.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Korban(
 
-    @field:SerializedName("tangal_lahir")
-    val tangalLahir: String? = null,
+    @field:SerializedName("tanggal_lahir")
+    val tanggalLahir: String? = null,
 
     @field:SerializedName("Posko")
     val posko: Posko? = null,
@@ -37,4 +40,4 @@ data class Korban(
     @field:SerializedName("rentang_usia")
     val rentangUsia: String? = null
 
-)
+) : Parcelable

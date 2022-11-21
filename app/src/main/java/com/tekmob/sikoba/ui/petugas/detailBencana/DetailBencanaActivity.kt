@@ -86,7 +86,7 @@ class DetailBencanaActivity : AppCompatActivity() {
         binding.bencanaCard.apply {
             nama.text = bencana.nama
             lokasi.text = bencana.lokasi
-            tanggalKejadian.text = bencana.tanggalKejadian.toString()
+            tanggalKejadian.text = bencana.tanggalKejadian.toString().slice(IntRange(0,9))
         }
     }
 

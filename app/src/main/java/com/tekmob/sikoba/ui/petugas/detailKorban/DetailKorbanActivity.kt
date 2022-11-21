@@ -1,6 +1,5 @@
 package com.tekmob.sikoba.ui.petugas.detailKorban
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -87,7 +86,7 @@ class DetailKorbanActivity : AppCompatActivity() {
                 .load(korban.foto)
                 .into(binding.foto)
             nama.text = korban.nama
-            tempatTanggalLahir.text = getString(R.string.tempat_tanggal_lahir, (if (korban.tempatLahir == "") "Jakarta" else korban.tempatLahir), korban.tangalLahir)
+            tempatTanggalLahir.text = getString(R.string.tempat_tanggal_lahir, (if (korban.tempatLahir == "") "Jakarta" else korban.tempatLahir), korban.tanggalLahir?.slice(IntRange(0,9)))
             namaIbuKandung.text = if (korban.namaIbuKandung == "") "Fulanah" else korban.namaIbuKandung
             kondisi.text = korban.kondisi
             namaPosko.text = korban.posko?.nama ?: ""

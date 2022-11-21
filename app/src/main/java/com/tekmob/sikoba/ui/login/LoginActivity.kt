@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
                     viewModel.login()
                     AlertDialog.Builder(this).apply {
                         setTitle("Berhasil!")
-                        setMessage("Anda berhasil login sebagai admin!")
+                        setMessage("Anda berhasil login sebagai petugas!")
                         setPositiveButton("Lanjut") { _, _ ->
                             val intent = Intent(context, PetugasMainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
