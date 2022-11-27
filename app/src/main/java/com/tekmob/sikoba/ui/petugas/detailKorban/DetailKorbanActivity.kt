@@ -1,5 +1,6 @@
 package com.tekmob.sikoba.ui.petugas.detailKorban
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -13,6 +14,7 @@ import com.tekmob.sikoba.dataStore
 import com.tekmob.sikoba.databinding.ActivityDetailKorbanBinding
 import com.tekmob.sikoba.model.Korban
 import com.tekmob.sikoba.ui.ViewModelFactory
+import com.tekmob.sikoba.ui.petugas.ubahKorban.UbahKorbanActivity
 
 class DetailKorbanActivity : AppCompatActivity() {
 
@@ -36,6 +38,7 @@ class DetailKorbanActivity : AppCompatActivity() {
 
     fun setupAction(){
         binding.buttonHapus.setOnClickListener { hapusKorban() }
+        binding.buttonUbah.setOnClickListener { ubahKorban() }
     }
 
     fun setupViewModel(){
@@ -78,6 +81,13 @@ class DetailKorbanActivity : AppCompatActivity() {
             create()
             show()
         }
+    }
+
+    fun ubahKorban(){
+        val intent = Intent(this@DetailKorbanActivity, UbahKorbanActivity::class.java)
+        intent.putExtra(ID_KORBAN, idKorban)
+        intent.putExtra(ID_BENCANA, idBencana)
+        startActivity(intent)
     }
 
     fun setKorban(korban : Korban){

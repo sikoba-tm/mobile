@@ -14,6 +14,7 @@ import com.tekmob.sikoba.ui.petugas.daftarBencana.DaftarBencanaPetugasViewModel
 import com.tekmob.sikoba.ui.petugas.detailBencana.DetailBencanaViewModel
 import com.tekmob.sikoba.ui.petugas.detailKorban.DetailKorbanViewModel
 import com.tekmob.sikoba.ui.petugas.tambahKorban.TambahKorbanViewModel
+import com.tekmob.sikoba.ui.petugas.ubahKorban.UbahKorbanViewModel
 
 class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.NewInstanceFactory() {
 
@@ -31,6 +32,9 @@ class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.New
             }
             modelClass.isAssignableFrom(TambahKorbanViewModel::class.java) -> {
                 TambahKorbanViewModel(Injection.provideRepository()) as T
+            }
+            modelClass.isAssignableFrom(UbahKorbanViewModel::class.java) -> {
+                UbahKorbanViewModel(Injection.provideRepository()) as T
             }
             modelClass.isAssignableFrom(DaftarBencanaPetugasViewModel::class.java) -> {
                 DaftarBencanaPetugasViewModel(Injection.provideRepository()) as T
