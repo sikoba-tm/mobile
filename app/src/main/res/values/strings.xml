@@ -26,6 +26,7 @@
     <string name="button_kamera">Kamera</string>
     <string name="button_galeri">Galeri</string>
     <string name="tambah">Tambah</string>
+    <string name="simpan">Simpan</string>
     <string name="cari">Cari</string>
     <string name="capture_image">Capture Image</string>
     <string name="switch_camera">Switch Camera</string>

@@ -45,6 +45,15 @@ interface ApiService {
         @PartMap data : Map<String, @JvmSuppressWildcards RequestBody>
     ) : Call<Korban>
 
+    @Multipart
+    @PUT("/bencana/{id_bencana}/korban/{id_korban}")
+    fun ubahKorban(
+        @Path("id_bencana") idBencana: Int,
+        @Path("id_korban") idKorban: String,
+        @Part foto: MultipartBody.Part?,
+        @PartMap data : Map<String, @JvmSuppressWildcards RequestBody>
+    ) : Call<Korban>
+
     @DELETE("/bencana/{id_bencana}/korban/{id_korban}/")
     fun hapusKorban(
         @Path("id_bencana") idBencana : Int,

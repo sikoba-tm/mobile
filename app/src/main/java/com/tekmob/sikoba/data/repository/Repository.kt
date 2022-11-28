@@ -40,6 +40,10 @@ class Repository private constructor(
     private val _responseTambahKorban = MutableLiveData<Korban>()
     private val responseTambahKorban : LiveData<Korban> = _responseTambahKorban
 
+    private val resultUbahKorban = MediatorLiveData<Result<Korban>>()
+    private val _responseUbahKorban = MutableLiveData<Korban>()
+    private val responseUbahKorban : LiveData<Korban> = _responseUbahKorban
+
     private val resultCariKorban = MediatorLiveData<Result<List<Korban>>>()
     private val _responseCariKorban = MutableLiveData<List<Korban>>()
     private val responseCariKorban : LiveData<List<Korban>> = _responseCariKorban
@@ -165,6 +169,32 @@ class Repository private constructor(
         })
 
         return resultTambahKorban
+    }
+
+    fun ubahKorban(
+        idBencana: Int,
+        idKorban: String,
+        foto: MultipartBody.Part?,
+        data: Map<String, RequestBody>
+    ) : LiveData<Result<Korban>> {
+        resultUbahKorban.value = Result.Loading
+        apiService.ubahKorban(idBencana, idKorban, foto, data).enqueue(object : Callback<Korban> {
+            override fun onResponse(call: Call<Korban>, response: Response<Korban>) {
+                if (response.isSuccessful) {
+                    _responseUbahKorban.value = response.body()
+                    resultUbahKorban.addSource(responseUbahKorban) { res ->
+                        resultUbahKorban.value = Result.Success(res)
+                    }
+                    resultUbahKorban.removeSource(responseUbahKorban)
+                } else {
+                    resultUbahKorban.value = Result.Error("Error ubah korban")
+                }
+            }
+            override fun onFailure(call: Call<Korban>, t: Throwable) {
+                resultUbahKorban.value = t.message?.let { Result.Error(it) }
+            }
+        })
+        return resultUbahKorban
     }
 
     fun hapusKorban(idBencana: Int, idKorban : String){
