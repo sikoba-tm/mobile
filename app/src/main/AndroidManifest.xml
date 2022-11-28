@@ -20,6 +20,17 @@
         android:theme="@style/Theme.SIKOBA"
         tools:targetApi="31">
         <activity
+            android:name=".ui.SplashScreenActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity
             android:name=".ui.petugas.ubahKorban.UbahKorbanActivity"
             android:exported="false" />
         <activity
@@ -27,7 +38,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.pengguna.detailHasilPencarian.DetailHasilPencarianActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".ui.pengguna.cariKorban.CariKorbanActivity"
             android:exported="false" />
@@ -55,13 +66,7 @@
             android:name=".ui.pengguna.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.SIKOBA.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Theme.SIKOBA.NoActionBar" />
     </application>
 
 </manifest>
