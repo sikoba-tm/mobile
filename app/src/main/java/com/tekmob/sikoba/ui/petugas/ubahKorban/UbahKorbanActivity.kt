@@ -260,10 +260,6 @@ class UbahKorbanActivity : AppCompatActivity() {
                         setTitle("Berhasil!")
                         setMessage("Data korban berhasil diubah")
                         setPositiveButton("Lihat Detail Korban") { _,_ ->
-                            val intent = Intent(this@UbahKorbanActivity, DetailKorbanActivity::class.java)
-                            intent.putExtra(ID_KORBAN, korban.id)
-                            intent.putExtra(ID_BENCANA, idBencana)
-                            startActivity(intent)
                             finish()
                         }
                         create()

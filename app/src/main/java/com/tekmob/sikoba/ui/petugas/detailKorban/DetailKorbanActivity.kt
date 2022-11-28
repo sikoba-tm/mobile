@@ -43,6 +43,10 @@ class DetailKorbanActivity : AppCompatActivity() {
 
     fun setupViewModel(){
         viewModel = ViewModelProvider(this, ViewModelFactory(UserPreference.getInstance(dataStore)))[DetailKorbanViewModel::class.java]
+    }
+
+    override fun onStart() {
+        super.onStart()
         viewModel.getKorban(idBencana, idKorban).observe(this){ res ->
             when(res){
                 is Result.Loading -> {
