@@ -129,42 +129,6 @@ class UbahKorbanActivity : AppCompatActivity() {
                 }
             }
         }
-
-        viewModel.getDaftarPosko(idBencana).observe(this) { res ->
-            when(res) {
-                is Result.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
-                }
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    listPosko = res.data
-                    val poskoArrayAdapter = ArrayAdapter(this, R.layout.dropdown_textview, listPosko.map { it.nama })
-                    binding.editPosko.setAdapter(poskoArrayAdapter)
-                    binding.editPosko.onItemClickListener = object : AdapterView.OnItemClickListener {
-                        override fun onItemClick(
-                            parent: AdapterView<*>?,
-                            view: View?,
-                            position: Int,
-                            id: Long
-                        ) {
-                            selectedPoskoPosition = position
-                        }
-
-                    }
-                }
-                is Result.Error -> {
-                    binding.progressBar.visibility = View.GONE
-                    AlertDialog.Builder(this).apply {
-                        setTitle("Gagal!")
-                        setMessage("Terjadi kesalahan")
-                        setNegativeButton("Tutup") { _, _ ->
-                        }
-                        create()
-                        show()
-                    }
-                }
-            }
-        }
     }
 
     fun setKorban(korban : Korban){
