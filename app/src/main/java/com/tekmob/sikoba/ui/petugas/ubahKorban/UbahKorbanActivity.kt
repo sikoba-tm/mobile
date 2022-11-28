@@ -17,6 +17,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.signature.ObjectKey
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.tekmob.sikoba.*
 import com.tekmob.sikoba.auth.UserPreference
@@ -126,48 +129,15 @@ class UbahKorbanActivity : AppCompatActivity() {
                 }
             }
         }
-
-        viewModel.getDaftarPosko(idBencana).observe(this) { res ->
-            when(res) {
-                is Result.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
-                }
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    listPosko = res.data
-                    val poskoArrayAdapter = ArrayAdapter(this, R.layout.dropdown_textview, listPosko.map { it.nama })
-                    binding.editPosko.setAdapter(poskoArrayAdapter)
-                    binding.editPosko.onItemClickListener = object : AdapterView.OnItemClickListener {
-                        override fun onItemClick(
-                            parent: AdapterView<*>?,
-                            view: View?,
-                            position: Int,
-                            id: Long
-                        ) {
-                            selectedPoskoPosition = position
-                        }
-
-                    }
-                }
-                is Result.Error -> {
-                    binding.progressBar.visibility = View.GONE
-                    AlertDialog.Builder(this).apply {
-                        setTitle("Gagal!")
-                        setMessage("Terjadi kesalahan")
-                        setNegativeButton("Tutup") { _, _ ->
-                        }
-                        create()
-                        show()
-                    }
-                }
-            }
-        }
     }
 
     fun setKorban(korban : Korban){
         binding.apply {
             Glide.with(this@UbahKorbanActivity)
-                .load(korban.foto)
+                .load(korban.foto + "?c=" + System.currentTimeMillis())
+                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
+                .apply(RequestOptions.skipMemoryCacheOf(true))
+                .apply(RequestOptions().signature(ObjectKey("updated")))
                 .into(binding.fotoKorban)
             editNama.setText(korban.nama)
             editTempatLahir.setText(korban.tempatLahir)
@@ -239,47 +209,48 @@ class UbahKorbanActivity : AppCompatActivity() {
         data["kondisi"] = toRequestBody(binding.editKondisi.text)
         data["foto_url"] = korban.foto.toString().toRequestBody("text/plain".toMediaType())
 
-        var imageMultipart:MultipartBody.Part? = null
         if (getFile !== null) {
             val file = reduceFileImage(getFile as File)
             val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-            imageMultipart = MultipartBody.Part.createFormData(
+            val imageMultipart = MultipartBody.Part.createFormData(
                 "foto",
                 file.name,
                 requestImageFile
             )
+            viewModel.ubahKorban(idBencana, idKorban, imageMultipart, data).observe(this) {
+                resultUbahKorban(it);
+            }
+        } else {
+            viewModel.ubahKorban(idBencana, idKorban, null, data).observe(this) {
+                resultUbahKorban(it);
+            }
         }
+    }
 
-        viewModel.ubahKorban(idBencana, idKorban, imageMultipart, data).observe(this) {
-            when(it){
-                is Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    val korban = it.data
-                    AlertDialog.Builder(this).apply {
-                        setTitle("Berhasil!")
-                        setMessage("Data korban berhasil diubah")
-                        setPositiveButton("Lihat Detail Korban") { _,_ ->
-                            val intent = Intent(this@UbahKorbanActivity, DetailKorbanActivity::class.java)
-                            intent.putExtra(ID_KORBAN, korban.id)
-                            intent.putExtra(ID_BENCANA, idBencana)
-                            startActivity(intent)
-                            finish()
-                        }
-                        create()
-                        show()
+    private fun resultUbahKorban(it: Result<Korban>) {
+        when(it){
+            is Result.Loading -> binding.progressBar.visibility = View.VISIBLE
+            is Result.Success -> {
+                binding.progressBar.visibility = View.GONE
+                AlertDialog.Builder(this).apply {
+                    setTitle("Berhasil!")
+                    setMessage("Data korban berhasil diubah")
+                    setPositiveButton("Lihat Detail Korban") { _,_ ->
+                        finish()
                     }
+                    create()
+                    show()
                 }
-                is Result.Error -> {
-                    binding.progressBar.visibility = View.GONE
-                    AlertDialog.Builder(this).apply {
-                        setTitle("Gagal!")
-                        setMessage("Terjadi kesalahan")
-                        setNegativeButton("Tutup") { _, _ ->
-                        }
-                        create()
-                        show()
+            }
+            is Result.Error -> {
+                binding.progressBar.visibility = View.GONE
+                AlertDialog.Builder(this).apply {
+                    setTitle("Gagal!")
+                    setMessage("Terjadi kesalahan")
+                    setNegativeButton("Tutup") { _, _ ->
                     }
+                    create()
+                    show()
                 }
             }
         }
