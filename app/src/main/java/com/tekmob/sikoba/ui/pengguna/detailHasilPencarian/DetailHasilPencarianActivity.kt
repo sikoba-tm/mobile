@@ -6,6 +6,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.signature.ObjectKey
 import com.tekmob.sikoba.R
 import com.tekmob.sikoba.auth.UserPreference
 import com.tekmob.sikoba.data.Result
@@ -56,7 +59,10 @@ class DetailHasilPencarianActivity : AppCompatActivity() {
     fun setKorban(korban : Korban){
         binding.apply {
             Glide.with(this@DetailHasilPencarianActivity)
-                .load(korban.foto)
+                .load(korban.foto + "?c=" + System.currentTimeMillis())
+                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
+                .apply(RequestOptions.skipMemoryCacheOf(true))
+                .apply(RequestOptions().signature(ObjectKey("updated")))
                 .into(binding.foto)
             nama.text = korban.nama
             tempatTanggalLahir.text = getString(R.string.tempat_tanggal_lahir, (if (korban.tempatLahir == "") "-" else korban.tempatLahir), korban.tanggalLahir?.slice(IntRange(0,9)))

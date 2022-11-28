@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.signature.ObjectKey
 import com.tekmob.sikoba.R
 import com.tekmob.sikoba.databinding.KorbanCardBinding
 import com.tekmob.sikoba.model.Korban
@@ -31,7 +34,10 @@ RecyclerView.Adapter<ListKorbanAdapter.ListKorbanHolder>()
                 namaIbuKandung.text = if (korban.namaIbuKandung == "") "Fulanah" else korban.namaIbuKandung
                 kondisi.text = korban.kondisi
                 Glide.with(holder.itemView.context)
-                    .load(korban.foto)
+                    .load(korban.foto + "?c=" + System.currentTimeMillis())
+                    .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
+                    .apply(RequestOptions.skipMemoryCacheOf(true))
+                    .apply(RequestOptions().signature(ObjectKey("updated")))
                     .into(holder.binding.foto)
             }
             itemView.setOnClickListener{
