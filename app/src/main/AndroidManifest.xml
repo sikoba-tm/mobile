@@ -20,7 +20,7 @@
         android:theme="@style/Theme.SIKOBA"
         tools:targetApi="31">
         <activity
-            android:name=".DetailPencarianTerimpanActivity"
+            android:name=".ui.pengguna.detailPencarianTersimpan.DetailPencarianTerimpanActivity"
             android:exported="false" />
         <activity
             android:name=".ui.SplashScreenActivity"
