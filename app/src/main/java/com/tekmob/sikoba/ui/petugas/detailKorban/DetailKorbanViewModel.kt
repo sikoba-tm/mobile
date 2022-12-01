@@ -1,10 +1,10 @@
 package com.tekmob.sikoba.ui.petugas.detailKorban
 
 import androidx.lifecycle.ViewModel
-import com.tekmob.sikoba.data.repository.Repository
+import com.tekmob.sikoba.data.remote.repository.ApiRepository
 
-class DetailKorbanViewModel(private val repository: Repository) : ViewModel() {
+class DetailKorbanViewModel(private val apiRepository: ApiRepository) : ViewModel() {
 
-    fun getKorban(idBencana : Int, idKorban: String) = repository.getKorban(idBencana, idKorban)
-    fun hapusKorban(idBencana: Int, idKorban: String) = repository.hapusKorban(idBencana, idKorban)
+    fun getKorban(idBencana : Int, idKorban: String) = apiRepository.getKorban(idBencana, idKorban)
+    fun hapusKorban(idBencana: Int, idKorban: String) = apiRepository.hapusKorban(idBencana, idKorban)
 }

@@ -1,10 +1,10 @@
 package com.tekmob.sikoba.ui.pengguna.detailHasilPencarian
 
 import androidx.lifecycle.ViewModel
-import com.tekmob.sikoba.data.repository.Repository
+import com.tekmob.sikoba.data.remote.repository.ApiRepository
 
-class DetailHasilPencarianViewModel(private val repository: Repository) : ViewModel() {
+class DetailHasilPencarianViewModel(private val apiRepository: ApiRepository) : ViewModel() {
 
-    fun getKorban(idBencana : Int, idKorban: String) = repository.getKorban(idBencana, idKorban)
+    fun getKorban(idBencana : Int, idKorban: String) = apiRepository.getKorban(idBencana, idKorban)
 
 }

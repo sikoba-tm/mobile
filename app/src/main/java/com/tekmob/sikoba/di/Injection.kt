@@ -1,13 +1,12 @@
 package com.tekmob.sikoba.di
 
-import android.content.Context
 import com.tekmob.sikoba.data.remote.retrofit.ApiConfig
-import com.tekmob.sikoba.data.repository.Repository
+import com.tekmob.sikoba.data.remote.repository.ApiRepository
 
 object Injection {
 
-    fun provideRepository(): Repository {
+    fun provideRepository(): ApiRepository {
         val apiService = ApiConfig.getApiService()
-        return Repository.getInstance(apiService)
+        return ApiRepository.getInstance(apiService)
     }
 }

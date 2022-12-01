@@ -78,9 +78,6 @@ class DaftarBencanaFragment : Fragment() {
         binding.rvBencana.adapter = adapter
         adapter.setOnItemClickCallback(object : ListBencanaAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Bencana) {
-//                val detailBencanaIntent = Intent(context, DetailBencanaActivity::class.java)
-//                detailBencanaIntent.putExtra(DetailBencanaActivity.BENCANA, data)
-//                startActivity(detailBencanaIntent)
                 val cariKorbanIntent = Intent(context, CariKorbanActivity::class.java)
                 cariKorbanIntent.putExtra(BENCANA, data)
                 startActivity(cariKorbanIntent)

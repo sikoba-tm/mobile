@@ -9,7 +9,6 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -35,8 +34,6 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class TambahKorbanActivity : AppCompatActivity() {
@@ -195,7 +192,7 @@ class TambahKorbanActivity : AppCompatActivity() {
         data["rentang_usia"] = toRequestBody(binding.editRentangUmur.text)
         data["nama_ibu_kandung"] = toRequestBody(binding.editIbu.text)
         data["kondisi"] = toRequestBody(binding.editKondisi.text)
-        val idPosko = listPosko[selectedPoskoPosition].iD
+        val idPosko = listPosko[selectedPoskoPosition].id
 
         val file = reduceFileImage(getFile as File)
         val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())

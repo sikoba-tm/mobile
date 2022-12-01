@@ -1,9 +1,12 @@
 package com.tekmob.sikoba.model
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
+@Entity
 @Parcelize
 data class Korban(
 
@@ -31,6 +34,7 @@ data class Korban(
     @field:SerializedName("nama_ibu_kandung")
     val namaIbuKandung: String? = null,
 
+    @PrimaryKey
     @field:SerializedName("ID")
     val id: String? = null,
 

@@ -3,7 +3,9 @@ package com.tekmob.sikoba.ui.petugas.detailKorban
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -16,7 +18,11 @@ import com.tekmob.sikoba.data.Result
 import com.tekmob.sikoba.dataStore
 import com.tekmob.sikoba.databinding.ActivityDetailKorbanBinding
 import com.tekmob.sikoba.model.Korban
+import com.tekmob.sikoba.model.KorbanLocal
+import com.tekmob.sikoba.model.PoskoLocal
 import com.tekmob.sikoba.ui.ViewModelFactory
+import com.tekmob.sikoba.ui.pengguna.pencarianTersimpan.PencarianTersimpanViewModel
+import com.tekmob.sikoba.ui.pengguna.pencarianTersimpan.ViewModelFactoryPencarianTersimpan
 import com.tekmob.sikoba.ui.petugas.ubahKorban.UbahKorbanActivity
 
 class DetailKorbanActivity : AppCompatActivity() {
