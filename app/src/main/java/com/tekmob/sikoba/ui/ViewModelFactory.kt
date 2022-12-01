@@ -1,5 +1,6 @@
 package com.tekmob.sikoba.ui
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.tekmob.sikoba.auth.UserPreference
@@ -10,6 +11,7 @@ import com.tekmob.sikoba.ui.pengguna.cariKorban.CariKorbanViewModel
 import com.tekmob.sikoba.ui.pengguna.daftarBencana.DaftarBencanaViewModel
 import com.tekmob.sikoba.ui.pengguna.detailHasilPencarian.DetailHasilPencarianViewModel
 import com.tekmob.sikoba.ui.pengguna.hasilPencarian.HasilPencarianViewModel
+import com.tekmob.sikoba.ui.pengguna.pencarianTersimpan.PencarianTersimpanViewModel
 import com.tekmob.sikoba.ui.petugas.daftarBencana.DaftarBencanaPetugasViewModel
 import com.tekmob.sikoba.ui.petugas.detailBencana.DetailBencanaViewModel
 import com.tekmob.sikoba.ui.petugas.detailKorban.DetailKorbanViewModel

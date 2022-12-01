@@ -1,4 +1,4 @@
-package com.tekmob.sikoba.data.repository
+package com.tekmob.sikoba.data.remote.repository
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -16,7 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class Repository private constructor(
+class ApiRepository private constructor(
     private val apiService: ApiService
 ){
 
@@ -200,11 +200,11 @@ class Repository private constructor(
     fun hapusKorban(idBencana: Int, idKorban : String){
         apiService.hapusKorban(idBencana, idKorban).enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                Log.d("Repository", "Success hapus")
+                Log.d("ApiRepository", "Success hapus")
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                t.message?.let { Log.e("Repository", it) }
+                t.message?.let { Log.e("ApiRepository", it) }
             }
 
         })
@@ -238,12 +238,12 @@ class Repository private constructor(
 
     companion object {
         @Volatile
-        private var instance: Repository? = null
+        private var instance: ApiRepository? = null
         fun getInstance(
             apiService: ApiService
-        ) : Repository =
+        ) : ApiRepository =
             instance ?: synchronized(this) {
-                instance ?: Repository(apiService)
+                instance ?: ApiRepository(apiService)
             }.also { instance = it }
     }
 }

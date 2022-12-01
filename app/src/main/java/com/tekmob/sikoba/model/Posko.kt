@@ -1,9 +1,12 @@
 package com.tekmob.sikoba.model
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
+@Entity
 @Parcelize
 data class Posko(
 
@@ -19,8 +22,9 @@ data class Posko(
 	@field:SerializedName("CreatedAt")
 	val createdAt: String? = null,
 
+	@PrimaryKey
 	@field:SerializedName("ID")
-	val iD: Int? = null,
+	val id: Int? = null,
 
 	@field:SerializedName("UpdatedAt")
 	val updatedAt: String? = null,
@@ -30,4 +34,5 @@ data class Posko(
 
 	@field:SerializedName("notelp_pj")
 	val notelpPj: String? = null
+
 ) : Parcelable
