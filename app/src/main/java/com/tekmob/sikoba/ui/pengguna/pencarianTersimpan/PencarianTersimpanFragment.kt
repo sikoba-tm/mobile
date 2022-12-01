@@ -42,7 +42,7 @@ class PencarianTersimpanFragment : Fragment() {
         adapter = PencarianTerimpanAdapter(requireContext())
         adapter.setOnItemClickCallback(object : PencarianTerimpanAdapter.OnItemClickCallback{
             override fun onItemClicked(data: KorbanLocal) {
-                val intent = Intent(context, DetailHasilPencarianActivity::class.java)
+                val intent = Intent(context, DetailPencarianTerimpanActivity::class.java)
                 intent.putExtra(DetailPencarianTerimpanActivity.ID_KORBAN, data.id)
                 startActivity(intent)
             }

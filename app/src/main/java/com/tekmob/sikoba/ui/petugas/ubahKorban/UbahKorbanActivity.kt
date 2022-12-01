@@ -49,7 +49,7 @@ class UbahKorbanActivity : AppCompatActivity() {
     private lateinit var idKorban: String
     private lateinit var korban: Korban
     val dateFormatter = SimpleDateFormat("dd/MM/yyyy")
-    val inputFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX")
+    val inputFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
 
 
     private var getFile: File? = null
@@ -147,6 +147,9 @@ class UbahKorbanActivity : AppCompatActivity() {
                 }
             })
             editIbu.setText(korban.namaIbuKandung)
+            editRentangUmur.setText(korban.rentangUsia, false)
+            editKondisi.setText(korban.kondisi, false)
+
         }
         this@UbahKorbanActivity.korban = korban
     }
